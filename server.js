@@ -6,23 +6,15 @@ const app = express();
 
 app.use(express.json());
 
+const pizzasRoute = require('./routes/pizzasRoute')
+const userRoute = require('./routes/userRoute')
+
 app.get("/", (req, res)=>{
     res.send("Server working");
 });
 
-app.get("/getpizzas", (req,res)=>{
-
-    Pizza.find({}, (err , docs)=>{
-
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.send(docs)
-        }
-    })
-
-});
+app.use('/api/pizzas/', pizzasRoute)
+app.use('/api/user/', userRoute)
 
 const port = process.env.PORT || 5000;
 
